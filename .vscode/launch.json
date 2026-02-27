@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug Spring Boot (mvn)",
+            "request": "launch",
+            "mainClass": "org.springframework.boot.loader.JarLauncher",
+            "projectName": "spring-boot-app",
+            "vmArgs": "-Dspring-boot.run.fork=false",
+            "preLaunchTask": "Build Spring Boot App",
+            "cwd": "${workspaceFolder}",
+            "args": "-DskipTests spring-boot:run"
+        },
+        {
+            "type": "java",
+            "name": "Debug Spring Boot (jar)",
+            "request": "launch",
+            "mainClass": "com.example.SpringBootAppApplication",
+            "projectName": "spring-boot-app",
+            "preLaunchTask": "Build Spring Boot App",
+            "cwd": "${workspaceFolder}",
+            "args": "",
+            "env": {
+                "SPRING_PROFILES_ACTIVE": "dev"
+            }
+        }
+    ]
+}
