@@ -3,14 +3,17 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug Spring Boot (mvn)",
+            "name": "Debug Spring Boot (app)",
             "request": "launch",
-            "mainClass": "org.springframework.boot.loader.JarLauncher",
+            "mainClass": "com.example.SpringBootAppApplication",
             "projectName": "spring-boot-app",
             "vmArgs": "-Dspring-boot.run.fork=false",
             "preLaunchTask": "Build Spring Boot App",
             "cwd": "${workspaceFolder}",
-            "args": "-DskipTests spring-boot:run"
+            "args": "",
+            "env": {
+                "SPRING_PROFILES_ACTIVE": "dev"
+            }
         },
         {
             "type": "java",
