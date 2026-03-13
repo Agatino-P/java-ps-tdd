@@ -1,4 +1,4 @@
-package com.example.api.controller;
+package com.example.api.controllers.Hello;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
