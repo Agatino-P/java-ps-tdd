@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="mongodb://admin:password123@localhost:27017/shopping_list?authSource=admin [DEBUG]" group="​SpringBootAppApplication" uuid="ba70460f-6f69-44fa-a26c-953ff9309aa5">
+    <data-source source="LOCAL" name="mongodb://admin:password123@localhost:27017/shopping_list?authSource=admin [DEBUG]" group="​SpringBootAppApplication" uuid="bb3206f1-6c31-46d1-9123-1ddd5de83648">
       <driver-ref>mongo.4</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

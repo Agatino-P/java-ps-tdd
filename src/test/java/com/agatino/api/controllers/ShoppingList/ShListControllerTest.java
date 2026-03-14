@@ -1,6 +1,6 @@
-package com.example.api.controllers.ShoppingList;
+package com.agatino.api.controllers.ShoppingList;
 
-import com.example.api.repositories.ShListRepository;
+import com.agatino.api.repositories.ShListRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

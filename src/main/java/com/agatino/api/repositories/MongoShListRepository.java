@@ -1,6 +1,6 @@
-package com.example.api.repositories;
+package com.agatino.api.repositories;
 
-import com.example.api.controllers.ShoppingList.ShListSummary;
+import com.agatino.api.controllers.ShoppingList.ShListSummary;
 import org.springframework.stereotype.Repository;
 
 @Repository
