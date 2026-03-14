@@ -1,0 +1,39 @@
+name: java-mongo
+services:
+  # The Database
+  mongodb:
+    image: mongo:latest
+    container_name: local-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      # 1. Credentials for the Database itself
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    volumes:
+      - mongo-data:/data/db
+
+  # The Web Interface
+  mongo-express:
+    image: mongo-express:latest
+    container_name: local-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      # 2. Credentials for the Web Interface Login (Browser Popup)
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: password123
+
+      # 3. Credentials for the UI to talk to the Database
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
