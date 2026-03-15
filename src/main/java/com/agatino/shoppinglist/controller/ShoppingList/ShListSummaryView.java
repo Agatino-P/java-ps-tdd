@@ -1,4 +1,4 @@
-package com.agatino.shoppinglist.controllers.ShoppingList;
+package com.agatino.shoppinglist.controller.ShoppingList;
 
 import java.util.UUID;
 

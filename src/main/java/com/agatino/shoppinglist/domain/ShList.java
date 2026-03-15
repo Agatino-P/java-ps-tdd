@@ -12,24 +12,30 @@ public class ShList {
     private final UUID id;
     @Getter
     private final String name;
-    private final List<ShListItem> items = new ArrayList<>();
+    private final List<ShItem> items = new ArrayList<>();
 
-    public ShList(UUID id, String name, List<ShListItem> items) {
+    // Canonical Constructor
+    public ShList(UUID id, String name, List<ShItem> items) {
         this.id = id;
         this.name = name;
-        this.items.addAll(items != null ? items : Collections.emptyList());
+        if (items != null) {
+            this.items.addAll(items);
+        }
+    }
+
+    public ShList(String name, List<ShItem> items) {
+        this(UUID.randomUUID(), name, items);
     }
 
     public ShList(String name) {
-        this.id = UUID.randomUUID();
-        this.name = name;
+        this(UUID.randomUUID(), name, Collections.emptyList());
     }
 
-    public void addItem(ShListItem item) {
+    public void addItem(ShItem item) {
         this.items.add(item);
     }
 
-    public List<ShListItem> getItems() {
+    public List<ShItem> getItems() {
         return Collections.unmodifiableList(items);
     }
 }

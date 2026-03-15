@@ -1,22 +1,24 @@
 package com.agatino.api.controllers.ShoppingList;
 
-import com.agatino.shoppinglist.controllers.ShoppingList.ShItemDto;
-import com.agatino.shoppinglist.controllers.ShoppingList.ShListController;
-import com.agatino.shoppinglist.controllers.ShoppingList.ShListDto;
-import com.agatino.shoppinglist.controllers.ShoppingList.ShListSummaryView;
+import com.agatino.shoppinglist.application.service.ShListService;
+import com.agatino.shoppinglist.controller.ShoppingList.ShListController;
+import com.agatino.shoppinglist.controller.ShoppingList.CreateShListDto;
+import com.agatino.shoppinglist.controller.ShoppingList.ShListSummaryView;
 import com.agatino.shoppinglist.domain.ShList;
-import com.agatino.shoppinglist.domain.ShListItem;
-import com.agatino.shoppinglist.infrastructure.repositories.ShListRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,13 +35,13 @@ class ShListControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private ShListRepository repository;
+    private ShListService shListService;
 
     @Test
     void shouldReturnEmptyArrayWhenRepositoryIsEmpty() throws Exception {
         ShListSummaryView[] expectedSummaries = new ShListSummaryView[0];
 
-        when(repository.getAllSummaries()).thenReturn(expectedSummaries);
+        when(shListService.getAllSummaries()).thenReturn(expectedSummaries);
 
         mockMvc.perform(get("/api/shlist"))
                 .andExpect(status().isOk())
@@ -50,7 +52,7 @@ class ShListControllerTest {
     void shouldReturnExpectedSummariesWhenRepositoryIsNotEmpty() throws Exception {
         ShListSummaryView[] expectedSummaries = FakeDataGenerator.getSomeSummaries(); // Given: We have some expected data
 
-        when(repository.getAllSummaries()).thenReturn(expectedSummaries); // When: The repository is called, it returns our data
+        when(shListService.getAllSummaries()).thenReturn(expectedSummaries); // When: The repository is called, it returns our data
 
         String expectedJson = objectMapper.writeValueAsString(expectedSummaries);
 
@@ -61,15 +63,24 @@ class ShListControllerTest {
 
     @Test
     void shouldAddShList() throws Exception {
-        ShListDto aShListDto = new ShListDto(
-                UUID.fromString("9e4ea1df-d380-4aae-b6f6-5887dacfd93e"),
-                "A shopping list",
-                new ShItemDto[0]);
+        CreateShListDto aShListDto = new CreateShListDto(
+                "A shopping list");
         String aShListDtoJson = objectMapper.writeValueAsString(aShListDto);
-        mockMvc.perform(post("/api/shlist")).andExpect(status().isNoContent());
 
-        ShList expectedShList = new ShList(aShListDto.uuid(),aShListDto.name(), List.of(new ShListItem[0]));
+        mockMvc.perform(post("/api/shlist")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(aShListDtoJson))
+                .andExpect(status().isNoContent());
 
+        Predicate<ShList> assertCorrectMapping = shList -> {
+            assertThat(shList.getId()).isNotEqualTo(new UUID(0L, 0L));
+            assertThat(shList.getName()).isEqualTo("A shopping list");
+            assertThat(shList.getItems()).isEmpty();
+            return true;
+        };
+
+        //TODO use a shlist with items and test that too
+        verify(shListService).add(argThat(assertCorrectMapping::test));
     }
 
     private static class FakeDataGenerator {
