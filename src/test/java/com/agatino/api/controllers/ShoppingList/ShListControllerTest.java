@@ -1,6 +1,6 @@
 package com.agatino.api.controllers.ShoppingList;
 
-import com.agatino.api.repositories.ShListRepository;
+import com.agatino.shoppinglist.infrastructure.repositories.ShListRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,9 @@ class ShListControllerTest {
 
     @Test
     void shouldReturnEmptyArrayWhenRepositoryIsEmpty() throws Exception {
-        when(repository.getAllSummaries()).thenReturn(new ShListSummary[0]);
+        ShListSummary[] expectedSummaries = new ShListSummary[0];
+
+        when(repository.getAllSummaries()).thenReturn(expectedSummaries);
 
         mockMvc.perform(get("/api/shlist"))
                 .andExpect(status().isOk())
@@ -39,11 +41,12 @@ class ShListControllerTest {
     @Test
     void shouldReturnExpectedSummariesWhenRepositoryIsNotEmpty() throws Exception {
         ShListSummary[] expectedSummaries = FakeDataGenerator.getSomeSummaries(); // Given: We have some expected data
+
         when(repository.getAllSummaries()).thenReturn(expectedSummaries); // When: The repository is called, it returns our data
 
         String expectedJson = objectMapper.writeValueAsString(expectedSummaries);
 
-        mockMvc.perform(get("/api/shlist")) // Then: The controller should return that data as JSON
+        mockMvc.perform(get("/api/shlist"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedJson));
     }

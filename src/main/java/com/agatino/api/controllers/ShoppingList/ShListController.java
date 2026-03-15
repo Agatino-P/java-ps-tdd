@@ -1,6 +1,6 @@
 package com.agatino.api.controllers.ShoppingList;
 
-import com.agatino.api.repositories.ShListRepository;
+import com.agatino.shoppinglist.infrastructure.repositories.ShListRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

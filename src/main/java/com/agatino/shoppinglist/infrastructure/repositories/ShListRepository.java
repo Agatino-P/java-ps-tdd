@@ -1,9 +1,7 @@
-package com.agatino.api.repositories;
+package com.agatino.shoppinglist.infrastructure.repositories;
 
 import com.agatino.api.controllers.ShoppingList.ShListSummary;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface ShListRepository {
     ShListSummary[] getAllSummaries();
 }
