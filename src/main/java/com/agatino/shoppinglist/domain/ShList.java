@@ -14,6 +14,12 @@ public class ShList {
     private final String name;
     private final List<ShListItem> items = new ArrayList<>();
 
+    public ShList(UUID id, String name, List<ShListItem> items) {
+        this.id = id;
+        this.name = name;
+        this.items.addAll(items != null ? items : Collections.emptyList());
+    }
+
     public ShList(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
