@@ -1,5 +1,7 @@
 package com.agatino.api.controllers.ShoppingList;
 
+import com.agatino.shoppinglist.controllers.ShoppingList.ShListController;
+import com.agatino.shoppinglist.controllers.ShoppingList.ShListSummaryView;
 import com.agatino.shoppinglist.infrastructure.repositories.ShListRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -29,7 +31,7 @@ class ShListControllerTest {
 
     @Test
     void shouldReturnEmptyArrayWhenRepositoryIsEmpty() throws Exception {
-        ShListSummary[] expectedSummaries = new ShListSummary[0];
+        ShListSummaryView[] expectedSummaries = new ShListSummaryView[0];
 
         when(repository.getAllSummaries()).thenReturn(expectedSummaries);
 
@@ -40,7 +42,7 @@ class ShListControllerTest {
 
     @Test
     void shouldReturnExpectedSummariesWhenRepositoryIsNotEmpty() throws Exception {
-        ShListSummary[] expectedSummaries = FakeDataGenerator.getSomeSummaries(); // Given: We have some expected data
+        ShListSummaryView[] expectedSummaries = FakeDataGenerator.getSomeSummaries(); // Given: We have some expected data
 
         when(repository.getAllSummaries()).thenReturn(expectedSummaries); // When: The repository is called, it returns our data
 
@@ -52,11 +54,11 @@ class ShListControllerTest {
     }
 
     private static class FakeDataGenerator {
-        static ShListSummary[] getSomeSummaries() {
-            return new ShListSummary[]{
-                    new ShListSummary(UUID.fromString("7b2b73c2-d4b9-4452-9706-96b618cfbe54"),
+        static ShListSummaryView[] getSomeSummaries() {
+            return new ShListSummaryView[]{
+                    new ShListSummaryView(UUID.fromString("7b2b73c2-d4b9-4452-9706-96b618cfbe54"),
                             "Groceries", 5),
-                    new ShListSummary(UUID.fromString("8f3c75d4-e5c8-5563-0817-07c729d0cf65"),
+                    new ShListSummaryView(UUID.fromString("8f3c75d4-e5c8-5563-0817-07c729d0cf65"),
                             "Hardware", 2)
             };
         }

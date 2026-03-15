@@ -1,9 +1,8 @@
-package com.agatino.api.controllers.ShoppingList;
+package com.agatino.shoppinglist.controllers.ShoppingList;
 
 import com.agatino.shoppinglist.infrastructure.repositories.ShListRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/shlist")
@@ -16,7 +15,12 @@ public class ShListController {
     }
 
     @GetMapping()
-    public ShListSummary[] GetAll() {
+    public ShListSummaryView[] getAll() {
         return repository.getAllSummaries();
+    }
+    
+    @PostMapping("")
+    public ResponseEntity<Void> post(@RequestBody String value) {
+        return ResponseEntity.noContent().build();
     }
 }

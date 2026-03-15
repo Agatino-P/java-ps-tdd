@@ -1,7 +1,7 @@
 package com.agatino.shoppinglist.infrastructure.repositories;
 
-import com.agatino.api.controllers.ShoppingList.ShListSummary;
+import com.agatino.shoppinglist.controllers.ShoppingList.ShListSummaryView;
 
 public interface ShListRepository {
-    ShListSummary[] getAllSummaries();
+    ShListSummaryView[] getAllSummaries();
 }
