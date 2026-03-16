@@ -2,7 +2,6 @@ package com.agatino.shoppinglist.infrastructure.repository;
 import com.agatino.shoppinglist.controller.ShoppingList.ShListSummaryView;
 import com.agatino.shoppinglist.domain.model.ShItem;
 import com.agatino.shoppinglist.domain.model.ShList;
-import com.agatino.shoppinglist.domain.port.ShListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -10,17 +9,15 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class MongoShListRepository implements ShListRepository {
+public class MongoShListRepository  {
 
     private final MongoShListDocumentRepository documentRepository;
 
-    @Override
     public void save(ShList shList) {
         ShListDocument document = toShListDocument( shList);
         documentRepository.save(document);
     }
 
-    @Override
     public ShListSummaryView[] getAllSummaries() {
         return new ShListSummaryView[0];
     }
