@@ -1,10 +1,10 @@
-package com.agatino.api.controllers.ShoppingList;
+package com.agatino.shoppinglist.controllers.ShoppingList;
 
 import com.agatino.shoppinglist.application.service.ShListService;
 import com.agatino.shoppinglist.controller.ShoppingList.ShListController;
 import com.agatino.shoppinglist.controller.ShoppingList.CreateShListDto;
 import com.agatino.shoppinglist.controller.ShoppingList.ShListSummaryView;
-import com.agatino.shoppinglist.domain.ShList;
+import com.agatino.shoppinglist.domain.model.ShList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +80,7 @@ class ShListControllerTest {
         };
 
         //TODO use a shlist with items and test that too
-        verify(shListService).add(argThat(assertCorrectMapping::test));
+        verify(shListService).save(argThat(assertCorrectMapping::test));
     }
 
     private static class FakeDataGenerator {

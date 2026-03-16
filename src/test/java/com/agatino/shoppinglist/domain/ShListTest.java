@@ -1,5 +1,7 @@
 package com.agatino.shoppinglist.domain;
 
+import com.agatino.shoppinglist.domain.model.ShItem;
+import com.agatino.shoppinglist.domain.model.ShList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

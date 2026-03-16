@@ -1,4 +1,4 @@
-package com.agatino.shoppinglist.domain;
+package com.agatino.shoppinglist.domain.model;
 
 import lombok.Getter;
 

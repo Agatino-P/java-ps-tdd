@@ -1,8 +1,8 @@
 package com.agatino.shoppinglist.application.service;
 
 import com.agatino.shoppinglist.controller.ShoppingList.ShListSummaryView;
-import com.agatino.shoppinglist.domain.ShList;
-import com.agatino.shoppinglist.infrastructure.repository.ShListRepository;
+import com.agatino.shoppinglist.domain.model.ShList;
+import com.agatino.shoppinglist.domain.port.ShListRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +14,8 @@ public class ShListService {
         this.shListRepository = shListRepository;
     }
 
-    public void add(ShList shList) {
-        shListRepository.add(shList);
+    public void save(ShList shList) {
+        shListRepository.save(shList);
     }
 
     public ShListSummaryView[] getAllSummaries() {

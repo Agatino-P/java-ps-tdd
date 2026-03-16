@@ -1,8 +1,8 @@
 package com.agatino.shoppinglist.controller.ShoppingList;
 
 import com.agatino.shoppinglist.application.service.ShListService;
-import com.agatino.shoppinglist.domain.ShItem;
-import com.agatino.shoppinglist.domain.ShList;
+import com.agatino.shoppinglist.domain.model.ShItem;
+import com.agatino.shoppinglist.domain.model.ShList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class ShListController {
     @PostMapping("")
     public ResponseEntity<Void> post(@RequestBody CreateShListDto shListDto) {
 
-        shListService.add(toShList(shListDto));
+        shListService.save(toShList(shListDto));
         return ResponseEntity.noContent().build();
     }
 
