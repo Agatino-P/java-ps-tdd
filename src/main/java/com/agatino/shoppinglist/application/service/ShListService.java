@@ -4,6 +4,7 @@ import com.agatino.shoppinglist.controller.ShoppingList.ShListSummaryView;
 import com.agatino.shoppinglist.domain.model.ShList;
 import com.agatino.shoppinglist.infrastructure.repository.MongoShListRepository;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class ShListService {
@@ -18,7 +19,7 @@ public class ShListService {
         shListRepository.save(shList);
     }
 
-    public ShListSummaryView[] getAllSummaries() {
+    public List<ShListSummaryView> getAllSummaries() {
         return shListRepository.getAllSummaries();
     }
 }

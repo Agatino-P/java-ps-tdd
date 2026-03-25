@@ -18,8 +18,8 @@ public class MongoShListRepository  {
         documentRepository.save(document);
     }
 
-    public ShListSummaryView[] getAllSummaries() {
-        return new ShListSummaryView[0];
+    public List<ShListSummaryView> getAllSummaries() {
+        return documentRepository.getAllSummaries();
     }
 
     private ShItemDocument toShItemDocuments(ShItem shItem){

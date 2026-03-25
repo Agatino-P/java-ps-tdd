@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -39,7 +40,7 @@ class ShListControllerTest {
 
     @Test
     void shouldReturnEmptyArrayWhenRepositoryIsEmpty() throws Exception {
-        ShListSummaryView[] expectedSummaries = new ShListSummaryView[0];
+        List<ShListSummaryView> expectedSummaries = List.of();
 
         when(shListService.getAllSummaries()).thenReturn(expectedSummaries);
 
@@ -50,9 +51,9 @@ class ShListControllerTest {
 
     @Test
     void shouldReturnExpectedSummariesWhenRepositoryIsNotEmpty() throws Exception {
-        ShListSummaryView[] expectedSummaries = FakeDataGenerator.getSomeSummaries(); // Given: We have some expected data
+        List<ShListSummaryView> expectedSummaries = FakeDataGenerator.getSomeSummaries();
 
-        when(shListService.getAllSummaries()).thenReturn(expectedSummaries); // When: The repository is called, it returns our data
+        when(shListService.getAllSummaries()).thenReturn(expectedSummaries);
 
         String expectedJson = objectMapper.writeValueAsString(expectedSummaries);
 
@@ -84,13 +85,13 @@ class ShListControllerTest {
     }
 
     private static class FakeDataGenerator {
-        static ShListSummaryView[] getSomeSummaries() {
-            return new ShListSummaryView[]{
+        static List<ShListSummaryView> getSomeSummaries() {
+            return List.of(new ShListSummaryView[]{
                     new ShListSummaryView(UUID.fromString("7b2b73c2-d4b9-4452-9706-96b618cfbe54"),
                             "Groceries", 5),
                     new ShListSummaryView(UUID.fromString("8f3c75d4-e5c8-5563-0817-07c729d0cf65"),
                             "Hardware", 2)
-            };
+            });
         }
     }
 }
